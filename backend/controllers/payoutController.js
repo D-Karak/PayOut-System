@@ -6,7 +6,7 @@
 const { v4: uuidv4 } = require('uuid');
 const Transaction = require('../models/Transaction');
 const Beneficiary = require('../models/Beneficiary');
-const razorpay = require('../config/razorpay');
+const { createPayout } = require('../utils/razorpayX');
 const logger = require('../utils/logger');
 
 // ─── POST /api/payouts ────────────────────────────────────────────────
@@ -76,9 +76,7 @@ exports.initiatePayout = async (req, res) => {
                 queue_if_low_balance: true,
             };
 
-            const rzpPayout = await razorpay.payouts.create(payoutPayload, {
-                headers: { 'X-Payout-Idempotency': idempotencyKey }
-            });
+            const rzpPayout = await createPayout(payoutPayload, idempotencyKey);
 
             // 6. Update transaction with RazorpayX payout ID and status
             transaction.razorpayPayoutId = rzpPayout.id;

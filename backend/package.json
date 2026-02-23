@@ -20,7 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.20.0",
     "mongoose": "^8.2.1",
-    "razorpay": "^2.9.2",
+    "razorpay": "^2.9.6",
     "uuid": "^9.0.1",
     "winston": "^3.12.0"
   },
