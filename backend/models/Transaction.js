@@ -25,8 +25,8 @@ const transactionSchema = new mongoose.Schema(
         },
         purpose: {
             type: String,
-            enum: ['salary', 'vendor', 'refund', 'business', 'other'],
-            default: 'business',
+            enum: ['payout', 'salary', 'utility_bill', 'vendor_payment', 'cashback', 'refund'],
+            default: 'payout',
         },
         narration: {
             type: String,
