@@ -56,12 +56,12 @@ export default function PayoutTable({
                         />
                     </div>
                     {/* Filter */}
-                    <div className="flex items-center gap-1 bg-slate-800/60 border border-white/10 rounded-xl p-1">
+                    <div className="flex overflow-x-scroll items-center gap-1 bg-slate-800/60 border border-white/10 rounded-xl p-1" style={{ scrollbarWidth: 'none' }}>
                         {STATUS_FILTERS.map(s => (
                             <button key={s} onClick={() => onFilterChange(s)}
                                 className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${currentFilter === s
-                                        ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/20'
-                                        : 'text-slate-400 hover:text-white'
+                                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/20'
+                                    : 'text-slate-400 hover:text-white'
                                     }`}
                             >
                                 {s}

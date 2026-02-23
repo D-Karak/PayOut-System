@@ -3,9 +3,10 @@
  * components/Navbar.tsx — Admin Dashboard Navigation
  */
 import { useAuth } from '@/context/AuthContext';
-import { LogOut, Zap, User, Bell } from 'lucide-react';
+import { LogOut, Zap, User, Bell, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 const navLinks = [
     { href: '/dashboard', label: 'Dashboard' },
@@ -16,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
     const { admin, logout } = useAuth();
     const pathname = usePathname();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-900/80 backdrop-blur-xl">
@@ -38,8 +40,8 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${pathname === link.href
-                                        ? 'bg-violet-600/20 text-violet-300 border border-violet-500/30'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                    ? 'bg-violet-600/20 text-violet-300 border border-violet-500/30'
+                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 {link.label}
@@ -49,9 +51,25 @@ export default function Navbar() {
 
                     {/* Right side */}
                     <div className="flex items-center gap-3">
-                        <button className="relative p-2 text-slate-400 hover:text-white transition-colors">
-                            <Bell className="h-5 w-5" />
-                        </button>
+                        {isMenuOpen ? <X className="h-6 w-6 text-white md:hidden cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)} /> : <Menu className="h-6 w-6 text-white md:hidden cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)} />}
+                        {isMenuOpen && (
+                            <div className="absolute top-16 left-0 w-full bg-slate-900 backdrop-blur-xl">
+                                <nav className="flex flex-col gap-1 p-4">
+                                    {navLinks.map(link => (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${pathname === link.href
+                                                ? 'bg-violet-600/20 text-violet-300 border border-violet-500/30'
+                                                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                                }`}
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    ))}
+                                </nav>
+                            </div>
+                        )}
                         <div className="h-6 w-px bg-white/10" />
                         <div className="flex items-center gap-2.5">
                             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-purple-600 text-white text-xs font-bold">
@@ -64,7 +82,7 @@ export default function Navbar() {
                         </div>
                         <button
                             onClick={logout}
-                            className="ml-1 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all duration-200 border border-transparent hover:border-red-400/20"
+                            className="ml-1 hidden md:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all duration-200 border border-transparent hover:border-red-400/20"
                         >
                             <LogOut className="h-4 w-4" />
                             <span className="hidden sm:inline">Logout</span>
