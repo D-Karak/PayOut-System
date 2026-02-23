@@ -16,7 +16,7 @@ interface Props {
 interface Beneficiary { _id: string; name: string; email: string; bankAccount: any; }
 
 const PURPOSES = ['payout', 'salary', 'utility_bill', 'vendor_payment', 'cashback', 'refund'];
-const MODES = ['IMPS', 'NEFT', 'RTGS', 'UPI'];
+const MODES = ['IMPS', 'NEFT', 'RTGS']; // UPI removed — requires VPA fund account type, not bank_account
 
 export default function InitiatePayoutModal({ onClose, onInitiate }: Props) {
     const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>([]);

@@ -35,7 +35,7 @@ const transactionSchema = new mongoose.Schema(
         },
         mode: {
             type: String,
-            enum: ['NEFT', 'RTGS', 'IMPS', 'UPI'],
+            enum: ['NEFT', 'RTGS', 'IMPS'], // UPI removed — requires VPA fund account type
             default: 'IMPS',
         },
 

@@ -31,7 +31,7 @@ interface Props {
     onPageChange: (page: number) => void;
 }
 
-const STATUS_FILTERS = ['all', 'pending', 'queued', 'processed', 'failed', 'reversed'];
+const STATUS_FILTERS = ['all', 'pending', 'queued', 'processing', 'processed', 'failed', 'reversed', 'cancelled'];
 
 export default function PayoutTable({
     transactions, isLoading, onFilterChange, onSearch, currentFilter, pagination, onPageChange
