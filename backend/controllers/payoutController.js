@@ -53,7 +53,7 @@ exports.initiatePayout = async (req, res) => {
         const transaction = await Transaction.create({
             beneficiary: beneficiaryId,
             amount,
-            purpose: purpose || 'business',
+            purpose: purpose || 'payout',
             narration: narration || `Payout to ${beneficiary.name}`,
             mode: mode || 'IMPS',
             status: 'pending',
