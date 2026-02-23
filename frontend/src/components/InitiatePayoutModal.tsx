@@ -15,14 +15,14 @@ interface Props {
 
 interface Beneficiary { _id: string; name: string; email: string; bankAccount: any; }
 
-const PURPOSES = ['salary', 'vendor', 'refund', 'business', 'other'];
+const PURPOSES = ['payout', 'salary', 'utility_bill', 'vendor_payment', 'cashback', 'refund'];
 const MODES = ['IMPS', 'NEFT', 'RTGS', 'UPI'];
 
 export default function InitiatePayoutModal({ onClose, onInitiate }: Props) {
     const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>([]);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
-        beneficiaryId: '', amount: '', purpose: 'business', narration: '', mode: 'IMPS'
+        beneficiaryId: '', amount: '', purpose: 'payout', narration: '', mode: 'IMPS'
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
 
