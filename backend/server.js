@@ -30,6 +30,7 @@ const app = express();
 
 // ─── Connect to MongoDB ─────────────────────────────────────────────
 connectDB();
+app.set('trust proxy', 1); // Render reverse proxy fix
 
 // ─── Security Middleware ─────────────────────────────────────────────
 app.use(helmet());
