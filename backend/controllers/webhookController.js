@@ -67,7 +67,7 @@ exports.handleRazorpayWebhook = async (req, res) => {
             case 'payout.processed':
                 transaction.status = 'processed';
                 transaction.utr = payload.utr || null;
-                transaction.processedAt = new Date(payload.processed_at * 1000);
+                transaction.processedAt = payload.processed_at ? new Date(payload.processed_at * 1000) : new Date();
                 transaction.failureReason = null;
                 logger.info(`✅ Payout PROCESSED: ${payload.id} | UTR: ${payload.utr}`);
                 break;
