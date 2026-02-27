@@ -5,7 +5,6 @@
 const express = require('express');
 const router = express.Router();
 const verifyAdmin = require('../middleware/verifyAdmin');
-const ipWhitelist = require('../middleware/ipWhitelist');
 const idempotencyCheck = require('../middleware/idempotency');
 const {
     initiatePayout,
@@ -14,8 +13,8 @@ const {
     getDashboardStats
 } = require('../controllers/payoutController');
 
-// All payout routes require admin auth + IP whitelist
-router.use(verifyAdmin, ipWhitelist);
+// All payout routes require admin auth
+router.use(verifyAdmin);
 
 // Dashboard stats (no idempotency required)
 router.get('/stats/dashboard', getDashboardStats);

@@ -5,7 +5,6 @@
 const express = require('express');
 const router = express.Router();
 const verifyAdmin = require('../middleware/verifyAdmin');
-const ipWhitelist = require('../middleware/ipWhitelist');
 const {
     addBeneficiary,
     getAllBeneficiaries,
@@ -13,8 +12,8 @@ const {
     deleteBeneficiary
 } = require('../controllers/beneficiaryController');
 
-// All beneficiary routes require admin auth + IP whitelist
-router.use(verifyAdmin, ipWhitelist);
+// All beneficiary routes require admin auth
+router.use(verifyAdmin);
 
 router.route('/')
     .get(getAllBeneficiaries)
